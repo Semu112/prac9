@@ -49,10 +49,15 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     std::string operatoR = queue->front();
 
+    //First element in a new call to convertAndComputeHelper should always be an operator
+    if(isNumber(operatoR)){
+        return "Error";
+    }
+
     queue->pop();
 
-    //If we get to the second element and the queue size is less than two, return error
-    if(queue->size() < 2){
+    //If we get to the second element and the queue is empty, return error
+    if(queue->empty()){
         return "Error";
     }
 
@@ -171,7 +176,7 @@ std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
 
     std::string output = convertAndComputeHelper(newQueue);
 
-    if(newQueue->size() > 1){
+    if(newQueue->size() >= 1){
         return "Error";
     }
 
