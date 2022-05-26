@@ -48,7 +48,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     queue->pop();
 
     if(queue->size() < 2){
-        return "error";
+        return "Error";
     }
 
     std::string secondElement = "";
@@ -60,8 +60,8 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
         secondElement = convertAndComputeHelper(queue);
 
         //If returned error
-        if(secondElement == "error"){
-            return "error";
+        if(secondElement == "Error"){
+            return "Error";
         }
 
         secondElementResult = secondElement.substr(secondElement.find(" =") + 2); //stores result in variable to be used in stoi funciton later
@@ -72,7 +72,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     }
     // //If element in queue is not between 0 and 99 inclusive
     else if(stoi(secondElement) > 99 || stoi(secondElement) < 0){
-        return "error";
+        return "Error";
     }
 
     queue->pop();
@@ -84,8 +84,8 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
         thirdElement = convertAndComputeHelper(queue);
 
         //If returned error
-        if(thirdElement == "error"){
-            return "error";
+        if(thirdElement == "Error"){
+            return "Error";
         }
 
         thirdElementResult = thirdElement.substr(thirdElement.find(" =") + 2);
@@ -96,7 +96,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     }
     //If element in queue is not between 0 and 99 inclusive
     else if(stoi(thirdElement) > 99 || stoi(thirdElement) < 0){
-        return "error";
+        return "Error";
     }
 
     int intNumberOne = std::stoi(secondElementResult); //mySubstrFunction returns result without ")"
@@ -132,7 +132,7 @@ std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
     std::string output = convertAndComputeHelper(newQueue);
 
     if(newQueue->size() > 1){
-        return "error";
+        return "Error";
     }
 
     return output;
