@@ -22,11 +22,15 @@ bool isNumber(std::string string){
     int stringSize = string.size();
 
     if(stringSize > 1){
+
         if(string[0] == '-' || isdigit(string[0])){
+
             for(int i = 1; i<stringSize; i++){
+
                 if(!isdigit(string[i])){
                     return false;
                 }
+
             }
         }
         else{
@@ -125,6 +129,10 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
 std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
 
+    if(queue.empty()){
+        return "Error";
+    }
+
     std::queue<std::string>* newQueue = new std::queue<std::string>;
 
     *newQueue = queue;
@@ -134,6 +142,8 @@ std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
     if(newQueue->size() > 1){
         return "Error";
     }
+
+    delete newQueue;
 
     return output;
 

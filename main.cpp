@@ -14,23 +14,21 @@ int main(void){
 
     std::queue<std::string> queue;
 
-    std::string currentTerm;
+    std::string currentTerm = "";
 
     //Puts space seperated input into a queue
     for(int i = 0; i<input.size(); i++){
-        if(isdigit(input[i]) || input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/'){
 
-            currentTerm = input[i];
+        while(input[i] != ' ' && input[i] != '\0'){ //If null character isn't there and there isn't a space before the end of the string, this loop will iterate into oblivion
 
-            while(isdigit(input[i+1])){
+            currentTerm.push_back(input[i]);
 
-                i++;
-
-                currentTerm += input[i];
-            }
-
-            queue.push(currentTerm);
+            i++;
         }
+
+        queue.push(currentTerm);
+
+        currentTerm = "";
     }
 
     std::cout << pti.convertAndCompute(queue) <<std::endl;
