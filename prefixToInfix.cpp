@@ -59,7 +59,6 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     std::string secondElement = "";
     secondElement =  queue->front();
     std::string secondElementResult = secondElement;
-    queue->pop();
 
     // bool needsBrackets;
     // //Get computed eqn by finding everything before the space before the equals sign
@@ -95,6 +94,9 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     else if(stoi(secondElement) > 99 || stoi(secondElement) < 0){
         return "Error";
     }
+    else{
+        queue->pop();
+    }
 
     //If we get to the third element and the queue is empty, return error
     if(queue->empty()){
@@ -103,7 +105,6 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     std::string thirdElement = queue->front();
     std::string thirdElementResult = thirdElement;
-    queue->pop();
 
     if(!isNumber(thirdElement)){
 
@@ -123,7 +124,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
         //Get computed eqn by finding everything before the space before the equals sign
         // if(needsBrackets){
-            thirdElement = "(" + thirdElement.substr(0, thirdElement.find(" =")) + ")";
+        thirdElement = "(" + thirdElement.substr(0, thirdElement.find(" =")) + ")";
         // }
         // else{
         //     thirdElement = thirdElement.substr(0, thirdElement.find(" ="));
@@ -133,6 +134,9 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     //If element in queue is not between 0 and 99 inclusive
     else if(stoi(thirdElement) > 99 || stoi(thirdElement) < 0){
         return "Error";
+    }
+    else{
+        queue->pop();
     }
 
     int intNumberOne = std::stoi(secondElementResult); //mySubstrFunction returns result without ")"
