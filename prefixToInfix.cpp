@@ -129,6 +129,8 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
 std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
 
+    printQueue(queue);
+
     if(queue.empty()){
         return "Error";
     }

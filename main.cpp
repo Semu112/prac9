@@ -19,6 +19,10 @@ int main(void){
     //Puts space seperated input into a queue
     for(int i = 0; i<input.size(); i++){
 
+        while(input[i] == ' '){
+            i++;
+        }
+
         while(input[i] != ' ' && input[i] != '\0'){ //If null character isn't there and there isn't a space before the end of the string, this loop will iterate into oblivion
 
             currentTerm.push_back(input[i]);
