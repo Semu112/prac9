@@ -51,6 +51,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     queue->pop();
 
+    //If we get to the second element and the queue size is less than two, return error
     if(queue->size() < 2){
         return "Error";
     }
@@ -58,6 +59,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     std::string secondElement = "";
     secondElement =  queue->front();
     std::string secondElementResult = secondElement;
+    queue->pop();
 
     // bool needsBrackets;
     // //Get computed eqn by finding everything before the space before the equals sign
@@ -70,8 +72,6 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
 
     if(!(isNumber(secondElement))){
-
-        
 
         secondElement = convertAndComputeHelper(queue);
 
@@ -92,15 +92,25 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     }
     // //If element in queue is not between 0 and 99 inclusive
-    else if(stoi(secondElement) >= 99 || stoi(secondElement) <= 0){
+    else if(stoi(secondElement) > 99 || stoi(secondElement) < 0){
         return "Error";
     }
 
-    queue->pop();
+    //If we get to the third element and the queue is empty, return error
+    if(queue->empty()){
+        return "Error";
+    }
+
     std::string thirdElement = queue->front();
     std::string thirdElementResult = thirdElement;
+    queue->pop();
 
     if(!isNumber(thirdElement)){
+
+        //If is operator and there are less than two elements in queue, error
+        if(queue->size() < 2){
+            return "Error";
+        }
 
         thirdElement = convertAndComputeHelper(queue);
 
@@ -121,7 +131,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     }
     //If element in queue is not between 0 and 99 inclusive
-    else if(stoi(thirdElement) >= 99 || stoi(thirdElement) <= 0){
+    else if(stoi(thirdElement) > 99 || stoi(thirdElement) < 0){
         return "Error";
     }
 
@@ -150,12 +160,6 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 }
 
 std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
-
-    printQueue(queue);
-
-    if(queue.empty()){
-        return "Error";
-    }
 
     std::queue<std::string>* newQueue = new std::queue<std::string>;
 
