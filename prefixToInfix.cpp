@@ -59,7 +59,19 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     secondElement =  queue->front();
     std::string secondElementResult = secondElement;
 
+    // bool needsBrackets;
+    // //Get computed eqn by finding everything before the space before the equals sign
+    // if(operatoR == "+" || operatoR == "-"){
+    //     needsBrackets = true;;
+    // }
+    // else{
+    //     needsBrackets = false;;
+    // }
+
+
     if(!(isNumber(secondElement))){
+
+        
 
         secondElement = convertAndComputeHelper(queue);
 
@@ -71,11 +83,16 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
         secondElementResult = secondElement.substr(secondElement.find(" =") + 2); //stores result in variable to be used in stoi funciton later
 
         //Get computed eqn by finding everything before the space before the equals sign
-        secondElement = "(" + secondElement.substr(0, secondElement.find(" =")) + ")";
+        // if(needsBrackets){
+            secondElement = "(" + secondElement.substr(0, secondElement.find(" =")) + ")";
+        // }
+        // else{
+        //     secondElement = secondElement.substr(0, secondElement.find(" ="));
+        // }
 
     }
     // //If element in queue is not between 0 and 99 inclusive
-    else if(stoi(secondElement) > 99 || stoi(secondElement) < 0){
+    else if(stoi(secondElement) >= 99 || stoi(secondElement) <= 0){
         return "Error";
     }
 
@@ -95,11 +112,16 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
         thirdElementResult = thirdElement.substr(thirdElement.find(" =") + 2);
 
         //Get computed eqn by finding everything before the space before the equals sign
-        thirdElement = "(" + thirdElement.substr(0, thirdElement.find(" =")) + ")";
+        // if(needsBrackets){
+            thirdElement = "(" + thirdElement.substr(0, thirdElement.find(" =")) + ")";
+        // }
+        // else{
+        //     thirdElement = thirdElement.substr(0, thirdElement.find(" ="));
+        // }
 
     }
     //If element in queue is not between 0 and 99 inclusive
-    else if(stoi(thirdElement) > 99 || stoi(thirdElement) < 0){
+    else if(stoi(thirdElement) >= 99 || stoi(thirdElement) <= 0){
         return "Error";
     }
 
