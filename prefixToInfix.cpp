@@ -113,11 +113,6 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     if(!isNumber(thirdElement)){
 
-        //If is operator and there are less than two elements in queue, error
-        if(queue->size() < 2){
-            return "Error";
-        }
-
         thirdElement = convertAndComputeHelper(queue);
 
         //If returned error
@@ -148,7 +143,7 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
     int intNumberTwo = std::stoi(thirdElementResult);
 
     int result;
-    
+
     switch (operatoR[0]){
         case '+':
             result = intNumberOne + intNumberTwo;
@@ -162,6 +157,8 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
         case '/':
             result = intNumberOne / intNumberTwo;
             break;
+        default: //Default case checks if operator is not + - * or /
+            return "Error";
     }
 
     return secondElement + " " + operatoR + " " + thirdElement + " = " + std::to_string(result);
