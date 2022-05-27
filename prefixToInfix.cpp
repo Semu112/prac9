@@ -45,12 +45,17 @@ bool isNumber(std::string string){
 
 }
 
+bool ERRORDESCRIPTIONS = false;
+
 std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     std::string operatoR = queue->front();
 
     //First element in a new call to convertAndComputeHelper should always be an operator
     if(isNumber(operatoR)){
+        if(ERRORDESCRIPTIONS){
+            std::cout << "operator is not number" << std::endl;
+        }
         return "Error";
     }
 
@@ -58,6 +63,9 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     //If we get to the second element and the queue is empty, return error
     if(queue->empty()){
+        if(ERRORDESCRIPTIONS){
+            std::cout << "queue is empty" << std::endl;
+        }
         return "Error";
     }
 
@@ -96,7 +104,10 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     }
     // //If element in queue is not between 0 and 99 inclusive
-    else if(stoi(secondElement) > 99 || stoi(secondElement) < 0){
+    else if(secondElement.size() > 2 || stoi(secondElement) < 0){
+        if(ERRORDESCRIPTIONS){
+            std::cout << "second element out of range" << std::endl;
+        }
         return "Error";
     }
     else{
@@ -105,6 +116,9 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     //If we get to the third element and the queue is empty, return error
     if(queue->empty()){
+        if(ERRORDESCRIPTIONS){
+            std::cout << "queue is empty" << std::endl;
+        }
         return "Error";
     }
 
@@ -132,7 +146,10 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
 
     }
     //If element in queue is not between 0 and 99 inclusive
-    else if(stoi(thirdElement) > 99 || stoi(thirdElement) < 0){
+    else if(thirdElement.size() > 2 || stoi(thirdElement) < 0){
+        if(ERRORDESCRIPTIONS){
+            std::cout << "third element out of range" << std::endl;
+        }
         return "Error";
     }
     else{
@@ -158,6 +175,9 @@ std::string convertAndComputeHelper(std::queue<std::string>* queue){
             result = intNumberOne / intNumberTwo;
             break;
         default: //Default case checks if operator is not + - * or /
+            if(ERRORDESCRIPTIONS){
+                std::cout << "operatoR not + - / or *" << std::endl;
+            }
             return "Error";
     }
 
@@ -174,6 +194,9 @@ std::string PrefixToInfix::convertAndCompute(std::queue<std::string> queue){
     std::string output = convertAndComputeHelper(newQueue);
 
     if(newQueue->size() >= 1){
+        if(ERRORDESCRIPTIONS){
+            std::cout << "size of queue greater than 0 on finishing" << std::endl;
+        }
         return "Error";
     }
 
